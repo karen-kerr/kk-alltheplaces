@@ -4,6 +4,7 @@ import re
 import scrapy
 from scrapy.http import JsonRequest
 
+from locations.categories import apply_category
 from locations.hours import OpeningHours
 from locations.items import Feature
 from locations.spiders.vapestore_gb import clean_address
@@ -88,7 +89,11 @@ class DepartmentVeteransAffairsSpider(scrapy.Spider):
             if opening_hours:
                 properties["opening_hours"] = opening_hours
 
-            yield Feature(**properties)
+            item = Feature(**properties)
+            apply_category(
+                {"amenity": "social_facility", "social_facility": "outreach", "social_facility:for": "veteran"}, item
+            )
+            yield item
 
         if next_url := response.json()["links"]["next"]:
             yield JsonRequest(next_url, callback=self.parse_info)
