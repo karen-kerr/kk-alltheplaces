@@ -1,12 +1,16 @@
 import scrapy
 
+from locations.categories import Categories, apply_category
 from locations.items import Feature
 from locations.searchable_points import open_searchable_points
 
 
 class FirstCashSpider(scrapy.Spider):
     name = "first_cash"
-    item_attributes = {"brand": "First Cash"}
+    item_attributes = {
+        "brand": "First Cash",
+        "brand_wikidata": "Q5048636",
+    }
     allowed_domains = ["find.cashamerica.us"]
 
     def start_requests(self):
@@ -37,4 +41,6 @@ class FirstCashSpider(scrapy.Spider):
                 "brand": place["brand"].split(" #")[0],
             }
 
-            yield Feature(**properties)
+            item = Feature(**properties)
+            apply_category(Categories.SHOP_PAWNBROKER, item)
+            yield item
