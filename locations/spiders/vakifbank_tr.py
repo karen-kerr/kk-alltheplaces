@@ -8,7 +8,6 @@ from locations.dict_parser import DictParser
 class VakifbankTRSpider(scrapy.Spider):
     name = "vakifbank_tr"
     item_attributes = {"brand": "Vakıfbank", "brand_wikidata": "Q1148521"}
-    requires_proxy = True
 
     def start_requests(self):
         yield scrapy.FormRequest(
