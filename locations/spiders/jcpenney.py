@@ -25,4 +25,3 @@ class JcpenneySpider(CrawlSpider, StructuredDataSpider):
     ]
     custom_settings = {"USER_AGENT": BROWSER_DEFAULT}
     wanted_types = ["DepartmentStore"]
-    requires_proxy = True
