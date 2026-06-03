@@ -42,7 +42,6 @@ class WellstarUSSpider(Spider):
     item_attributes = {"brand": "WellStar Health System", "brand_wikidata": "Q7981073"}
     allowed_domains = ["www.wellstar.org"]
     start_urls = LISTING_PAGES
-    requires_proxy = "US"  # Cloudflare geoblocking in use
 
     def parse(self, response):
         for link in response.xpath('//a[contains(@href, "/locations/")]/@href').getall():
