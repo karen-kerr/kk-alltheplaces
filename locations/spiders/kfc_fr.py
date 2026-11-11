@@ -14,7 +14,6 @@ class KfcFRSpider(scrapy.Spider):
     item_attributes = KFC_SHARED_ATTRIBUTES
     start_urls = ["https://api.kfc.fr/stores/allStores"]
     custom_settings = {"ROBOTSTXT_OBEY": False, "USER_AGENT": FIREFOX_LATEST}
-    requires_proxy = True
 
     def parse(self, response, **kwargs):
         for location in chompjs.parse_js_object(response.text):
