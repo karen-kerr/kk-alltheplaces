@@ -12,7 +12,6 @@ class Mitre10AUSpider(StructuredDataSpider):
     item_attributes = {"brand": "Mitre 10", "brand_wikidata": "Q6882393"}
     allowed_domains = ["mitre10.com.au"]
     start_urls = ["https://www.mitre10.com.au/stores"]
-    requires_proxy = True
 
     def parse(self, response):
         data_raw = response.xpath(
